@@ -13,7 +13,20 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => {
-    console.log("connecting");
+    // const token = req.headers.authorization;
+    // const { query } = req.body;
+    // try {
+    //   if (query && new RegExp("login|addNewUser").test(query)) return {};
+
+    //   const claims = verify(token, process.env.JWT_SECRET);
+
+    //   console.log(claims);
+    // } catch (error) {
+    //   throw new AuthenticationError(
+    //     "Your session has expired!! Try login again!"
+    //   );
+    // }
+    return {};
   },
 });
 

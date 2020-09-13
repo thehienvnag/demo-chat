@@ -103,6 +103,7 @@ const addNewMessage = async (parent, { userId, conversationId, content }) => {
     conversation.messages.push(message.id);
     conversation.save();
     await message.populate("user");
+
     pubsub.publish("messageAdded", {
       messageAdded: message,
       conversationId: conversationId,
@@ -115,9 +116,7 @@ const addNewMessage = async (parent, { userId, conversationId, content }) => {
 const messageSubscriber = withFilter(
   () => pubsub.asyncIterator("messageAdded"),
   ({ conversationId }, args) => {
-    console.log(conversationId);
-    console.log(args);
-    return (conversationId === args.conversationId);
+    return conversationId === args.conversationId;
   }
 );
 
